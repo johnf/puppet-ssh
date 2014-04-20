@@ -12,7 +12,7 @@ class ssh::server($disable_root = true) {
     require => Package['openssh-server'],
   }
 
-  if ($disable_root) {
+  if (! $disable_root) {
     augeas { '/etc/ssh/sshd_config_disable_root_login':
       context => '/files/etc/ssh/sshd_config',
       changes => 'set PermitRootLogin no',
